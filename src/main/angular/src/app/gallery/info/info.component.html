@@ -1,0 +1,45 @@
+<div class="content">
+  <div class="main">
+    <div nz-row>
+      <div nz-col [nzMd]="16" [nzSm]="24">
+        <nz-carousel [nzEffect]="'scrollx'">
+          <div nz-carousel-content *ngFor="let i of lotImgs">
+            <img src="{{ getFullUrl(i.imgSrc) }}">
+          </div>
+        </nz-carousel>
+      </div>
+      <div nz-col [nzMd]="8" [nzSm]="24">
+        <div nz-row *ngIf="lot" class="info-wrapper">
+          <h1>{{ lot.name }}</h1>
+          <div class="info" nz-row>
+            <label nz-col [nzSpan]="12">开始时间:</label>
+            <span nz-col [nzSpan]="12">{{ renderTime(lot.startingTime) }}</span>
+          </div>
+          <div class="info" nz-row>
+            <label nz-col [nzSpan]="12">结束时间:</label>
+            <span nz-col [nzSpan]="12">{{ renderTime(lot.endingTime) }}</span>
+          </div>
+          <div class="info" nz-row>
+            <label nz-col [nzSpan]="12">起拍价:</label>
+            <span nz-col [nzSpan]="12" class="price">￥{{ lot.startingPrice }}</span>
+          </div>
+          <div class="info" nz-row>
+            <label nz-col [nzSpan]="12">成交价:</label>
+            <span nz-col [nzSpan]="12" *ngIf="!lot.endingPrice">暂无</span>
+            <span nz-col [nzSpan]="12" *ngIf="lot.endingPrice">{{ lot.endingPrice }}</span>
+          </div>
+          <div class="info" nz-row>
+            <label nz-col [nzSpan]="12">选择报价:</label>
+            <nz-input-number nz-col
+                             [nzSpan]="12"
+                             [nzMin]="lot.startingPrice" [nzFormatter]="formatterDollar"
+                             [(ngModel)]="quote"></nz-input-number>
+          </div>
+          <div class="info" nz-row>
+            <button nz-button type="button" [nzType]="'primary'">立即出价</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

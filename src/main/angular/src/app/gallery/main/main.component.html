@@ -1,0 +1,24 @@
+<div class="content" nz-row>
+  <div class="main">
+    <h2>所有拍品</h2>
+    <div class="card-wrapper">
+      <nz-card nzHoverable class="card"
+               [nzCover]="coverTemplate"
+               *ngFor="let i of lots;"
+               routerLink="/main/gallery/info" [queryParams]="{ id: i.id }">
+        <ng-template #coverTemplate>
+          <div style="" class="cover">
+            <img alt="example" src="{{ getFullUrl(i.lotImgs.length > 0 ? i.lotImgs[0].imgSrc : '') }}"/>
+          </div>
+        </ng-template>
+        <h3>
+          {{ i.name }}
+        </h3>
+        <p style="color: #f50;">起拍价: ￥ {{ i.startingPrice }}</p>
+        <p>
+          {{ i.description }}
+        </p>
+      </nz-card>
+    </div>
+  </div>
+</div>

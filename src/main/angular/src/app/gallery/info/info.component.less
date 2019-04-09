@@ -1,0 +1,47 @@
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  padding: 2em;
+
+  .main {
+    flex: 1;
+    max-width: 960px;
+
+    [nz-carousel-content] {
+      text-align: center;
+      height: 520px;
+      line-height: 160px;
+      background: rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        flex: 1;
+        flex-grow: 0;
+
+        //width: auto;
+        //height: 100%;
+        max-height: 100%;
+      }
+    }
+
+    .info-wrapper {
+      padding: 20px 30px;
+
+      .info {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+
+        .price {
+          color: #f50;
+          //font-size: 1.8em;
+        }
+      }
+    }
+  }
+}

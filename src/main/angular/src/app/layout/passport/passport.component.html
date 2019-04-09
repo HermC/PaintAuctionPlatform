@@ -1,0 +1,83 @@
+<div class="container">
+  <nz-card [nzHoverable]="'true'" class="wrapper">
+    <h3>PAP账户</h3>
+    <nz-tabset>
+      <nz-tab nzTitle="登录">
+        <nz-alert nzType="success" *ngIf="loginSuccessMsg !== null" [nzMessage]="loginSuccessMsg"></nz-alert>
+        <nz-alert nzType="error" *ngIf="loginErrorMsg !== null" [nzMessage]="loginErrorMsg"></nz-alert>
+        <form nz-form [formGroup]="loginForm">
+          <nz-form-item>
+            <nz-form-label>用户名</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="text" formControlName="username">
+              <nz-form-explain *ngIf="loginForm.get('username').dirty && loginForm.get('username').errors">
+                {{ getErrors(loginForm.get('username').errors) }}
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label>密码</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="password" formControlName="password">
+              <nz-form-explain *ngIf="loginForm.get('password').dirty && loginForm.get('password').errors">
+                {{ getErrors(loginForm.get('password').errors) }}
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <button nz-button type="button" class="login-form-button"
+                    [disabled]="logining"
+                    [nzType]="'primary'" (click)="submitLoginForm()">登录</button>
+          </nz-form-item>
+        </form>
+      </nz-tab>
+      <nz-tab nzTitle="注册">
+        <nz-alert nzType="success" *ngIf="registerSuccessMsg !== null" [nzMessage]="registerSuccessMsg"></nz-alert>
+        <nz-alert nzType="error" *ngIf="registerErrorMsg !== null" [nzMessage]="registerErrorMsg"></nz-alert>
+        <form nz-form [formGroup]="registerForm">
+          <nz-form-item>
+            <nz-form-label>用户名</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="text" formControlName="username">
+              <nz-form-explain *ngIf="registerForm.get('username').dirty && registerForm.get('username').errors">
+                {{ getErrors(registerForm.get('username').errors) }}
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label>邮箱</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="email" formControlName="email">
+              <nz-form-explain *ngIf="registerForm.get('email').dirty && registerForm.get('email').errors">
+                {{ getErrors(registerForm.get('email').errors) }}
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label>密码</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="password" formControlName="password">
+              <nz-form-explain *ngIf="registerForm.get('password').dirty && registerForm.get('password').errors">
+                {{ getErrors(registerForm.get('password').errors) }}
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label>确认密码</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="password" formControlName="confirm">
+              <nz-form-explain *ngIf="registerForm.get('confirm').dirty && registerForm.get('confirm').errors">
+                {{ getErrors(registerForm.get('confirm').errors) }}
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <button nz-button type="button" class="register-form-button"
+                    [disabled]="registering"
+                    [nzType]="'primary'" (click)="submitRegisterForm()">注册</button>
+          </nz-form-item>
+        </form>
+      </nz-tab>
+    </nz-tabset>
+  </nz-card>
+</div>
