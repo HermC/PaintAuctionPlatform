@@ -1,0 +1,18 @@
+logging:
+  file: logs/pap.log
+  level:
+    root: info
+
+jwt:
+  expiration: 86400000
+  secret: SHIRO_JWT
+  tokenHead: "Bearer "
+
+pap:
+  imagePath: "/root/deploy/pap/uploadImages"
+
+spring:
+  resources:
+    static-locations: file:${pap.imagePath}
+  mvc:
+    static-path-pattern: /images/**

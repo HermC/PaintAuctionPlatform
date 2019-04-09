@@ -1,0 +1,18 @@
+logging:
+  file: logs/pap.log
+  level:
+    root: debug
+
+jwt:
+  expiration: 86400000
+  secret: SHIRO_JWT
+  tokenHead: "Bearer "
+
+pap:
+  imagePath: "/Users/hermc/Documents/Projects/Java/PaintAuctionPlatform/uploadedImages"
+
+spring:
+  resources:
+    static-locations: file:${pap.imagePath}
+  mvc:
+    static-path-pattern: /images/**
