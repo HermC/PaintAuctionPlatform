@@ -99,7 +99,7 @@
       // 滚动事件触发
       window.onscroll = () => {
         if (this.getScrollTop() + this.getClientHeight() === this.getScrollHeight()) {
-          console.log('下拉刷新了');
+          // console.log('下拉刷新了');
           if (this.totalPages !== null && this.nextPage >= this.totalPages) {
             return;
           }
@@ -140,7 +140,7 @@
               }
               this.totalPages = totalPages;
 
-              console.log(this.images);
+              // console.log(this.images);
             } else {
               this.$message.error(res.message);
             }

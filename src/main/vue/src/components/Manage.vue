@@ -4,7 +4,7 @@
       <nav class="nav-bar-default">
         <div class="container">
           <div class="nav-bar-header">
-            <router-link class="nav-bar-brand" :to="{ name: 'index' }">
+            <router-link class="nav-bar-brand" :to="{ name: 'gallery' }">
               公益售卖
             </router-link>
             <span>管理后台</span>
@@ -77,7 +77,7 @@
     },
     methods: {
       onUploadSuccess(res, file, fileList) {
-        console.log(file);
+        // console.log(file);
         if (res.success) {
           this.uploadImageList.push(res.data.imageName);
         } else {
@@ -93,12 +93,12 @@
         }
       },
       onUploadError(error, file, fileList) {
-        console.log(error);
+        // console.log(error);
         this.$message.error(JSON.parse(error.message));
       },
 
       submitImageList() {
-        console.log(this.uploadImageList);
+        // console.log(this.uploadImageList);
         post('api/image/new', this.uploadImageList)
           .then(res => {
             if (res.success) {

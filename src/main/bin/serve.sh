@@ -25,8 +25,8 @@ RUNNING_USER=root
 # APP_HOME=/home/ubuntu/
 
 # 需要启动的java主程序(main方法类)
-APP_MAINCLASS=edu.nju.usm.UsmApplication
-APP_MAINJAR=usm-0.0.1-SNAPSHOT.jar
+APP_MAINCLASS=edu.nju.usm.AuctionApplication
+APP_MAINJAR=auction-0.0.1-SNAPSHOT.jar
 # APP_LIB=lib
 # APP_CONFIG=confg
 
@@ -40,7 +40,7 @@ APP_MAINJAR=usm-0.0.1-SNAPSHOT.jar
 
 # java虚拟机启动参数
 # JAVA_OPTS="-ms512m -mx512m -Xmn256m -Djava.awt.headless=true -XX:MaxPermSize=128m"
-JAVA_OPTS="-Xms128M -Xmx256M -XX:PermSize=64M -XX:MaxPermSize=128M"
+JAVA_OPTS="-Xms256M -Xmx512M -XX:PermSize=64M -XX:MaxPermSize=128M"
 
 #########################################################
 # (函数)判断程序是否已经启动

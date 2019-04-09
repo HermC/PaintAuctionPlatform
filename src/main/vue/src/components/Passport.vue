@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <el-card shadow="hover" class="login-card">
-      <h4>账户</h4>
+      <h4>
+        <router-link class="nav-bar-brand" :to="{ name: 'gallery' }">
+          公益售卖
+        </router-link>
+        账户</h4>
       <el-tabs v-model="activeTab">
         <el-tab-pane label="登录" name="login">
           <el-alert :title="loginMessage.text" type="error" show-icon v-if="loginMessage.show"
@@ -123,7 +127,7 @@
     },
     methods: {
       handleEnter($event) {
-        console.log($event);
+        // console.log($event);
       },
       closeLoginMessage: function () {
         this.loginMessage.show = false;
@@ -184,7 +188,7 @@
 </script>
 <style scoped>
   .container {
-    margin-top: 15%;
+    margin-top: 10%;
 
     display: flex;
     justify-content: center;
@@ -202,5 +206,11 @@
 
   .login {
     float: right;
+  }
+
+  a.nav-bar-brand {
+    font-size: 25px;
+    text-decoration: none;
+    color: black;
   }
 </style>

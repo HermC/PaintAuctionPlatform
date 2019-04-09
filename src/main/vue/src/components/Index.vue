@@ -4,18 +4,21 @@
       <nav class="nav-bar-default">
         <div class="container">
           <div class="nav-bar-header">
-            <a class="nav-bar-brand">
+            <router-link class="nav-bar-brand" :to="{ name: 'gallery' }">
               公益售卖
-            </a>
+            </router-link>
             <div class="nav-bar-user">
-              <el-menu mode="horizontal" :router="true">
-                <el-menu-item index="1" v-if="isGuest" :route="{ name: 'passport' }">
+              <el-menu mode="horizontal" :router="false">
+                <el-menu-item index="1" v-if="isGuest" @click="login">
                   登录
                 </el-menu-item>
-                <el-menu-item index="2" v-if="isGuest" :route="{ name: 'passport' }">
+                <el-menu-item index="2" v-if="isGuest" @click="login">
                   注册
                 </el-menu-item>
-                <el-menu-item index="3" v-if="!isGuest" @click="logout">
+                <el-menu-item index="3" v-if="!isGuest">
+                  {{ user.username }}
+                </el-menu-item>
+                <el-menu-item index="4" v-if="!isGuest" @click="logout">
                   登出
                 </el-menu-item>
               </el-menu>
@@ -39,21 +42,27 @@
     name: 'Index',
     data() {
       return {
+        user: {},
+
         isGuest: true
       }
     },
     created() {
-      console.log('reload');
+      // console.log('reload');
       let user = cookies('user');
       if (user) {
         this.isGuest = false;
+        this.user = JSON.parse(user);
       } else {
         this.isGuest = true;
       }
     },
     methods: {
+      login() {
+        this.$router.push({name: 'passport'});
+      },
       logout() {
-        console.log('logout');
+        // console.log('logout');
         cookies.remove('token');
         cookies.remove('user');
         this.$router.push({name: 'passport'});
@@ -66,6 +75,7 @@
     position: relative;
     margin-bottom: 20px;
   }
+
   .nav-bar-default {
     min-height: 60px;
     position: relative;
@@ -74,22 +84,26 @@
     transition: .3s;
     border: 0;
   }
-  @media(min-width: 768px) {
+
+  @media (min-width: 768px) {
     .container > .nav-bar-header {
       margin-right: 0;
       margin-left: 0;
     }
   }
-  @media (min-width: 1200px){
+
+  @media (min-width: 1200px) {
     .container {
       width: 1170px;
     }
   }
+
   @media (min-width: 992px) {
     .container {
       width: 970px;
     }
   }
+
   .container {
     display: block;
     /*padding-right: 15px;*/
@@ -97,30 +111,35 @@
     margin-right: auto;
     margin-left: auto;
   }
+
   /*.container > .nav-bar-header {*/
-    /*margin-right: -15px;*/
-    /*margin-left: -15px;*/
+  /*margin-right: -15px;*/
+  /*margin-left: -15px;*/
   /*}*/
   .container {
     min-height: 60px;
   }
+
   @media (min-width: 768px) {
     .nav-bar-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
+
     .nav-bar-user {
       /*float: right;*/
       display: inline-block;
       height: 60px;
     }
   }
+
   .nav-bar-header > a.nav-bar-brand {
     font-size: 40px;
     text-decoration: none;
     color: black;
   }
+
   .nav-bar-user {
     /*float: right;*/
     height: 60px;
