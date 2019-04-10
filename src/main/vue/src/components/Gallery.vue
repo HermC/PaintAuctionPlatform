@@ -60,6 +60,7 @@
   const windowSize = document.body.clientWidth;
 
   export default {
+    inject: ['reload'],
     name: "Gallery",
     data() {
       return {
@@ -164,6 +165,7 @@
               .then(res => {
                 if (res.success) {
                   this.$message.success('订购成功!');
+                  this.reload();
                   // TODO: 支付跳转
                 } else {
                   this.$message.error(res.message);

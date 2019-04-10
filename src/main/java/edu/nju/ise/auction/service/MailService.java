@@ -57,6 +57,6 @@ public class MailService {
         helper.setText(text, true);
 
         sender.send(mimeMessage);
-}
+    }
 
 }
