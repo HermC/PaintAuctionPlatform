@@ -6,12 +6,21 @@ import edu.nju.ise.auction.dao.ImageOrderDao;
 import edu.nju.ise.auction.model.Image;
 import edu.nju.ise.auction.model.ImageOrder;
 import edu.nju.ise.auction.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class ImageOrderService {
+
+    private static final Logger logger = LoggerFactory.getLogger(ImageOrderService.class);
 
     @Autowired
     private ImageOrderDao imageOrderDao;
@@ -19,6 +28,13 @@ public class ImageOrderService {
     private ImageDao imageDao;
     @Autowired
     private UserService userService;
+    @Autowired
+    private MailService mailService;
+
+    @Value("${server.address}")
+    private String serverAddress;
+    @Value("${server.port}")
+    private String serverPort;
 
     @Transactional
     public ImageOrder addOrder(String username, ImageOrderCommand command) {
@@ -45,7 +61,21 @@ public class ImageOrderService {
         image.setAvailable(Image.ORDERED);
         imageDao.save(image);
 
-        return orderInsert;
+        try {
+            Map<String, Object> params = new HashMap<>();
+            params.put("username", username);
+            params.put("recipient", command.getRecipient());
+            params.put("phone", command.getPhoneNumber());
+            params.put("address", command.getAddress());
+            params.put("src", "http://" + serverAddress + ":" + serverPort + "/images/" + image.getSrc());
+            mailService.sendTemplateMail("公益订单", params);
+            return orderInsert;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return null;
+        }
     }
 
 }
